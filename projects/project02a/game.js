@@ -9,7 +9,8 @@ function setup() {
 }
 
 function drawPlayer() {
-    // clear();
+    // uncomment clear so you don't get trails (unless you want them)
+    clear();
     fill(color);
     circle(x, y, width); // x position, y position, diameter
     drawGrid(window.innerWidth, window.innerHeight);
@@ -33,6 +34,9 @@ function movePlayer(ev) {
     } else if (ev.code == "Escape") {
         width -= 4;
     }
+
+    // after you change the data, don't forget to redraw the player
+    // again (with the new values):
     drawPlayer();
 }
 
