@@ -33,4 +33,9 @@ function movePlayer(ev) {
     } else if (ev.code == "Escape") {
         width -= 4;
     }
+    drawPlayer();
 }
+
+// Don't forget to add the event listener. It calls the "movePlayer" everytime
+// the user presses the keyboard:
+document.addEventListener("keydown", movePlayer);
