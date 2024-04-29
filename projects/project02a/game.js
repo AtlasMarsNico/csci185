@@ -9,7 +9,7 @@ function setup() {
 }
 
 function drawPlayer() {
-    // clear();
+    clear();
     fill(color);
     circle(x, y, width); // x position, y position, diameter
     drawGrid(window.innerWidth, window.innerHeight);
@@ -29,8 +29,12 @@ function movePlayer(ev) {
         console.log("right arrow!");
         x += 4;
     } else if (ev.code == "Space") {
-        width += 4;
+        y -= 30;
+        y += 20;
     } else if (ev.code == "Escape") {
         width -= 4;
     }
+    drawPlayer()
 }
+
+document.addEventListener("keydown", movePlayer);
