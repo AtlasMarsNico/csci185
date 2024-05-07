@@ -1,7 +1,12 @@
-let x = 100;
-let y = 200;
+let x = 780;
+let y = 300;
 let width = 100;
-let color = "red";
+let color = "black";
+let jumping = false;
+let jumpHeight = 100;
+let jumpSpeed = 5;
+let gravity = 0.5;
+let velocity = 0;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
@@ -11,30 +16,65 @@ function setup() {
 function drawPlayer() {
     clear();
     fill(color);
-    circle(x, y, width); // x position, y position, diameter
+    circle(x, y, width);
     drawGrid(window.innerWidth, window.innerHeight);
 }
+
 function movePlayer(ev) {
     console.log(ev.code);
-    if (ev.code == "ArrowUp") {
-        console.log("up arrow!");
-        y -= 4;
-    } else if (ev.code == "ArrowDown") {
-        console.log("down arrow!");
-        y += 4;
-    } else if (ev.code == "ArrowLeft") {
-        console.log("left arrow!");
+    if (ev.code == "ArrowLeft") {
         x -= 4;
     } else if (ev.code == "ArrowRight") {
-        console.log("right arrow!");
         x += 4;
+    } else if (ev.code =="KeyR") {
+        color = "Red";
+    } else if (ev.code == "KeyO") {
+        color = "Orange";
+    } else if (ev.code == "KeyY") {
+        color = "Yellow";
+    } else if (ev.code == "KeyG") {
+        color = "Green";
+    } else if (ev.code == "KeyB") {
+        color = "Blue";
+    } else if (ev.code == "KeyI") {
+        color = "Indigo";
+    } else if (ev.code == "KeyV") {
+        color = "Violet";
+    } else if (ev.code == "KeyL") {
+        color = "Black";
     } else if (ev.code == "Space") {
-        y -= 30;
-        y += 20;
-    } else if (ev.code == "Escape") {
-        width -= 4;
+        if (!jumping) {
+            jumping = true;
+            jump();
+        }
     }
-    drawPlayer()
+    drawPlayer();
+}
+
+function jump() {
+    let startY = y;
+    let peakY = startY - jumpHeight;
+    let jumpInterval = setInterval(function() {
+        if (y > peakY) {
+            y -= jumpSpeed;
+        } else {
+            clearInterval(jumpInterval);
+            velocity = 0;
+            fall();
+        }
+    }, 20);
+}
+
+function fall() {
+    let fallInterval = setInterval(function() {
+        velocity += gravity;
+        y += velocity;
+        if (y >= 300) {
+            y = 300;
+            clearInterval(fallInterval);
+            jumping = false;
+        }
+    }, 20);
 }
 
 document.addEventListener("keydown", movePlayer);

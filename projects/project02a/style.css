@@ -2,6 +2,7 @@ body {
     text-align: center;
     margin: 0px;
     overflow: hidden;
+    background-color: aquamarine;
 }
 
 body * {
@@ -14,4 +15,8 @@ h3 {
 
 main {
     height: 100vh;
+}
+
+header {
+    background-color: aqua;
 }
